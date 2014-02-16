@@ -9,7 +9,7 @@ Get the [NuGet package here][].
 
 If you want a service installer, you must declare one like this:
 
-```
+```C#
     public class MyInstaller : ServiceRunnerInstaller
     {
         protected override string ServiceName { get { return "MyServiceRunnerDemo"; } }
@@ -22,7 +22,7 @@ If you want a service installer, you must declare one like this:
 
 And then you just write your start and stop actions like this in your cosole app:
 
-```
+```C#
     class Program
     {
         static void Main(string[] args)
