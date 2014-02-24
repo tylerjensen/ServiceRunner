@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ServiceRunner</id>
+    <version>1.0.0</version>
+    <title>ServiceRunner</title>
+    <authors>Tyler Jensen</authors>
+    <owners>Tyler Jensen</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/duovia/ServiceRunner</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ServiceRunner is a library to make it easy to create a simple .NET Windows Service quickly, using a console application that can be debugged and later installed and run as a service with a bare minimum of code..</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2014 Duovia Inc.</copyright>
+    <language />
+    <tags>Windows Service Host</tags>
+  </metadata>
+</package>

@@ -5,7 +5,7 @@ using System.ServiceProcess;
 namespace ServiceRunner
 {
     [RunInstaller(true)]
-    public abstract class ServiceRunnerInstaller : System.Configuration.Install.Installer
+    public class ServiceRunnerInstaller : System.Configuration.Install.Installer
     {
         protected ServiceRunnerInstaller()
         {
@@ -75,11 +75,12 @@ namespace ServiceRunner
 
         }
 
-        protected abstract string ServiceName { get; }
-        protected abstract string ServiceDescription { get; }
-        protected abstract string ServiceDisplayName { get; }
-        protected abstract ServiceRunnerStartMode StartMode { get; }
-        protected abstract ServiceRunnerAccount Account { get; }
+        protected virtual string ServiceName { get { return "ServiceRunner"; } }
+        protected virtual string ServiceDescription { get { return "Service Runner description"; } }
+        protected virtual string ServiceDisplayName { get { return "Service Runner"; } }
+        protected virtual ServiceRunnerStartMode StartMode { get { return ServiceRunnerStartMode.Manual; } }
+        protected virtual ServiceRunnerAccount Account { get { return ServiceRunnerAccount.LocalSystem; } }
+
 
         private System.ServiceProcess.ServiceInstaller serviceInstaller1;
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;

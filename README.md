@@ -7,20 +7,7 @@ Get the [NuGet package here][].
 
 ### Using the library is easy. 
 
-If you want a service installer, you must declare one like this:
-
-```C#
-    public class MyInstaller : ServiceRunnerInstaller
-    {
-        protected override string ServiceName { get { return "MyServiceRunnerDemo"; } }
-        protected override string ServiceDescription { get { return "My Service Runner Demo description"; } }
-        protected override string ServiceDisplayName { get { return "My Service Runner Demo"; } }
-        protected override ServiceRunnerStartMode StartMode { get { return ServiceRunnerStartMode.Manual; } }
-        protected override ServiceRunnerAccount Account { get { return ServiceRunnerAccount.LocalSystem; } }
-    }
-```
-
-And then you just write your start and stop actions like this in your cosole app:
+Just write your start and stop actions like this in your console app:
 
 ```C#
     class Program
@@ -32,29 +19,54 @@ And then you just write your start and stop actions like this in your cosole app
             runner.Run(args, 
                 arguments =>
                 {
-                    File.WriteAllLines(logFile, new string[]
-                    {
-                        string.Format("args count: {0}", arguments.Length)
-                    });
-                    Console.WriteLine("args count: {0}", arguments.Length);
-                    File.WriteAllLines(logFile, new string[]
-                    {
-                        "start called"
-                    });
-                    Console.WriteLine("start called");
+                    //write your start code here
+                    // . . . 
                 }, 
                 () =>
                 {
-                    File.WriteAllLines(logFile, new string[]
-                    {
-                        "stop called"
-                    });
-                    Console.WriteLine("stop called");
+                    //write your stop code here
+                    // . . . 
                 });
-            Console.ReadLine();
         }
     }
 ```
-	
+
+The ServiceRunnerInstaller class must be inherited in your own project in order for the installutil installer to properly install your application as a Windows service. You can leave the implementation empty if you want the default values (shown). If you want different values, declare a class like the code below and change the values.
+
+```C#
+    /// <summary>
+    /// This class (name unimportant) must exist in your console app
+    /// for the installer to be recognized when you run installutil.exe
+    /// from the Windows\Microsoft.NET\Framework64\v4.0.30319 directory.
+    /// </summary>
+    public class MyInstaller : ServiceRunnerInstaller
+    {
+        protected override string ServiceName
+        {
+            get { return "ServiceRunner"; }
+        }
+
+        protected override string ServiceDescription
+        {
+            get { return "Service Runner description"; }
+        }
+
+        protected override string ServiceDisplayName
+        {
+            get { return "Service Runner"; }
+        }
+
+        protected override ServiceRunnerStartMode StartMode
+        {
+            get { return ServiceRunnerStartMode.Manual; }
+        }
+
+        protected override ServiceRunnerAccount Account
+        {
+            get { return ServiceRunnerAccount.LocalSystem; }
+        }
+    }
+```
+
 	
   [NuGet package here]: http://www.nuget.org/packages/ServiceRunner/
